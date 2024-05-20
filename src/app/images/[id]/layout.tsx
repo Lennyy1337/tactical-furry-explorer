@@ -8,10 +8,15 @@ interface fullProps {
     params: {url: string}
 }
 
-export default function FullLayout({children, params}: fullProps){
+export default function Fulllayout({
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>) {
     return (
-        <html lang="en">
-          <body className={`${inter.className} dark`}>{children}</body>
-        </html>
-      );
-}
+      <html lang="en">
+        <body className={`${inter.className} dark`}>{children}</body>
+      </html>
+    );
+  }
+  
