@@ -14,20 +14,38 @@ export default function Home() {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const [clicked, setClicked] = useState<boolean>(false);
   const [attempts, setAttempts] = useState<number>(0);
-  const [selectedCategory, setSelectedCategory] = useState<string>('animals.birb');
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    localStorage.getItem("savedsession") || "animals.birb"
+  );
 
   const router = useRouter();
+
   useEffect(() => {
+    if (localStorage.getItem("savedsession") === "null") {
+      localStorage.removeItem("savedsession");
+      router.refresh();
+    }
     getPics();
   }, []);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      getPics();
+    }
+  }, [selectedCategory]);
 
   async function getPics() {
     try {
       setLoading(true);
       setError(null);
+      console.log(selectedCategory);
+      if (localStorage.getItem("savedsession") === "null") {
+        localStorage.removeItem("savedsession");
+      }
 
+      localStorage.setItem("savedsession", selectedCategory);
       const url = `https://v2.yiff.rest/${selectedCategory}/?notes=disabled&amount=5`;
-      console.log(selectedCategory)
+
       if (loading) {
         return;
       }
@@ -36,7 +54,7 @@ export default function Home() {
       const fetchedPics = data.images.map((image: any) => image.url);
       setPics(fetchedPics);
     } catch (error) {
-      if (attempts >= 3) {
+      if (attempts >= 1) {
         console.error("Error fetching pictures:", error);
         setError("Failed to fetch images. Please try again.");
         setPics([]);
@@ -61,13 +79,15 @@ export default function Home() {
       const regex = /\/([^/]+)$/;
 
       const match = imageUrl.match(regex);
-      console.log(imageUrl);
-      console.log(match);
+
       const filenameWithExtension = match ? match[1] : null;
 
       const filename = filenameWithExtension
         ? filenameWithExtension.split(".")[0]
         : null;
+
+      localStorage.setItem("savedsession", selectedCategory);
+      console.log(selectedCategory);
 
       router.push("/images/" + filename + `?url=${imageUrl}`);
     }
@@ -118,12 +138,27 @@ export default function Home() {
 
   return (
     <>
-      <div className="max-w-screen flex flex-col bg-black min-w-screen md:h-screen">
+      <div className="max-w-screen flex flex-col bg-black min-w-screen md:h-screen dark">
         <div className="w-full text-center">
-          <h1 className="m-12 text-center text-bold text-3xl">Tactical furry explorer</h1>
-          <Select label="Category" className="dark w-1/2" defaultSelectedKeys={["animals.birb"]} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setSelectedCategory(event.target.value)}>
+          <h1 className="m-12 text-center text-bold text-3xl">
+            Tactical furry explorer
+          </h1>
+          <Select
+            label="Category"
+            className="dark w-1/2"
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+              setSelectedCategory(event.target.value);
+              console.log("event " + event.target.value);
+              console.log("value " + selectedCategory);
+            }}
+            selectedKeys={[selectedCategory]}
+          >
             {categories.map((category) => (
-              <SelectItem key={category.db} value={category.db} className="dark">
+              <SelectItem
+                key={category.db}
+                value={category.db}
+                className="dark bg-black shadow-black "
+              >
                 {category.name}
               </SelectItem>
             ))}
