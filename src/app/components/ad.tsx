@@ -33,6 +33,11 @@ const ads: Ad[] = [
     link: "",
     linkText: "",
   },
+  {
+    message: "Best furry serverside - ",
+    link: "https://discord.gg/ceyzD5AN4Y",
+    linkText: "Monogon"
+  }
 ];
 
 export default function AdComponent() {
@@ -46,7 +51,7 @@ export default function AdComponent() {
   if (!selectedAd) return null;
 
   return (
-    <footer className="w-full h-12 bg-gray-800">
+    <footer className="w-full h-12 bg-gray-800 flex justify-center">
       <h1 className="text-white text-center font-bold md:text-3xl text-xl m-auto">
         {selectedAd.message}{" "}
         <Link
