@@ -22,6 +22,11 @@ const ads: Ad[] = [
     message: "Made by",
     link: "https://discord.com/users/551819471149465631",
     linkText: "lenny :3"
+  },
+  {
+    message: "Dm sammy for free e sex (9inch+ dick only) - ",
+    link: "https://discord.com/users/1230939562537390110",
+    linkText: "Sammy"
   }
 ];
 
