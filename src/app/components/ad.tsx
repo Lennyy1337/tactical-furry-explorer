@@ -9,7 +9,7 @@ interface Ad {
 
 const ads: Ad[] = [
   {
-    message: "DM Alienconn if you are a femboy",
+    message: "DM Alienconn if you are a femboy - ",
     link: "https://discord.com/users/549558201733873664",
     linkText: "Alienconn"
   },
