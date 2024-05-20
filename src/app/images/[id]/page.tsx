@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     getImage();
-  }, [params.id]);
+  }, [params.id,]);
 
   return (
     <>
