@@ -6,6 +6,7 @@ import { downloadUrl } from "download.js";
 import { useRouter } from "next/navigation";
 import { Select, SelectItem } from "@nextui-org/select";
 import { categories } from "@/lib/categories";
+import AdComponent from "../components/ad";
 
 export default function Home() {
   const [pics, setPics] = useState<string[]>([]);
@@ -167,9 +168,7 @@ export default function Home() {
         >
           Regenerate images
         </button>
-        <footer className="w-full h-12 bg-gray-800">
-          <h1 className="text-white text-center font-bold md:text-3xl text-xl m-auto">DM <Link href={"https://discord.com/users/549558201733873664"} className="underline hover:decoration-red-800">Alienconn</Link> if you are a femboy</h1>
-        </footer>
+        <AdComponent/>
         
       </div>
       
