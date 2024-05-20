@@ -37,6 +37,11 @@ const ads: Ad[] = [
     message: "Best furry serverside - ",
     link: "https://discord.gg/ceyzD5AN4Y",
     linkText: "Monogon"
+  },
+  {
+    message: "Pyrite is selling his feet pics - ",
+    link: "https://discord.com/users/1100894899743768577",
+    linkText: "Pyrite"
   }
 ];
 
