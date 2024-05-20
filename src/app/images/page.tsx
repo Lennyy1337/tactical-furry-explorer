@@ -69,7 +69,7 @@ export default function Home() {
         ? filenameWithExtension.split(".")[0]
         : null;
 
-      router.push("/images/" + filename);
+      router.push("/images/" + filename + `?url=${imageUrl}`);
     }
 
     return (
