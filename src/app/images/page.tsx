@@ -142,7 +142,7 @@ export default function Home() {
               <SelectItem
                 key={category.db}
                 value={category.db}
-                className="dark bg-black shadow-black"
+                className="dark "
               >
                 {category.name}
               </SelectItem>
@@ -168,7 +168,7 @@ export default function Home() {
           Regenerate images
         </button>
         <footer className="w-full h-12 bg-gray-800">
-          <h1 className="text-white text-center font-bold text-3xl m-auto">DM <Link href={"https://discord.com/users/549558201733873664"}>Alienconn</Link> if you are a femboy</h1>
+          <h1 className="text-white text-center font-bold md:text-3xl text-xl m-auto">DM <Link href={"https://discord.com/users/549558201733873664"} className="underline hover:decoration-red-800">Alienconn</Link> if you are a femboy</h1>
         </footer>
         
       </div>
