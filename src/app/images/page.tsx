@@ -40,7 +40,7 @@ export default function Home() {
       }
 
       localStorage.setItem("savedsession", selectedCategory);
-      const url = `https://v2.yiff.rest/${selectedCategory}/?notes=disabled&amount=5`;
+      const url = `https://v2.yiff.rest/${selectedCategory}/?notes=disabled&amount=4`;
 
       const response = await axios.get(url);
       const data = response.data;
@@ -80,7 +80,7 @@ export default function Home() {
 
     return (
       <div
-        className="w-80 h-80 bg-white rounded-xl m-5 transition-all ease-in-out hover:scale-105"
+        className="max-sm:w-80 max-sm:h-80 w-[23rem] h-96 bg-white rounded-xl m-5 transition-all ease-in-out hover:scale-105"
         style={{
           backgroundImage: `url(${url})`,
           backgroundSize: "cover",
@@ -91,10 +91,11 @@ export default function Home() {
       >
         <button
           onClick={getFullImage}
-          className="border-2 m-2 border-black rounded-xl p-2"
+          className="border-2 m-2 border-black rounded-xl p-2 text-black"
         >
           Full screen
         </button>
+        
         {/* Content */}
       </div>
     );
@@ -124,7 +125,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="max-w-screen flex flex-col bg-black min-w-screen md:h-screen dark">
+      <div className="max-w-screen flex flex-col bg-black min-w-screen md:h-screen dark xl:max-h-screen justify-between">
         <div className="w-full text-center">
           <h1 className="m-12 text-center text-bold text-3xl">
             Tactical furry explorer
@@ -151,7 +152,7 @@ export default function Home() {
 
         <div className="flex flex-wrap justify-center">
           {loading ? (
-            Array.from({ length: 5 }).map((_, index) => (
+            Array.from({ length: 4 }).map((_, index) => (
               <SkeletonLoader key={index} />
             ))
           ) : error ? (
@@ -166,7 +167,12 @@ export default function Home() {
         >
           Regenerate images
         </button>
+        <footer className="w-full h-12 bg-gray-800">
+          <h1 className="text-white text-center font-bold text-3xl m-auto">DM <Link href={"https://discord.com/users/549558201733873664"}>Alienconn</Link> if you are a femboy</h1>
+        </footer>
+        
       </div>
+      
     </>
   );
 }
