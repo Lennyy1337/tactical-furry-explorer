@@ -2,7 +2,6 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { downloadUrl } from "download.js";
 import { useRouter } from "next/navigation";
 import { Select, SelectItem } from "@nextui-org/select";
 import { categories } from "@/lib/categories";
@@ -63,10 +62,6 @@ export default function Home() {
   }
 
   function ImageCard({ url }: { url: string }) {
-    function downloadpic() {
-      downloadUrl(url, url);
-    }
-
     async function getFullImage() {
       const imageUrl = url;
 
@@ -76,7 +71,7 @@ export default function Home() {
       const filename = filenameWithExtension ? filenameWithExtension.split(".")[0] : null;
 
       localStorage.setItem("savedsession", selectedCategory);
-      router.push("/images/" + filename + `?url=${imageUrl}`);
+      window.open("/images/" + filename + `?url=${imageUrl}`, "_blank");
     }
 
     return (
