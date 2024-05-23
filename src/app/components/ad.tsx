@@ -14,12 +14,12 @@ const ads: Ad[] = [
     linkText: "Alienconn",
   },
   {
-    message: "Free furry porn at",
+    message: "Free furry porn at ",
     link: "https://discord.gg/pAVMsAp85M",
     linkText: "Verve Solutions",
   },
   {
-    message: "Made by",
+    message: "Made by ",
     link: "https://discord.com/users/551819471149465631",
     linkText: "lenny :3",
   },
