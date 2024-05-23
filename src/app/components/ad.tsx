@@ -75,7 +75,7 @@ export default function AdComponent() {
           href={selectedAd.link}
           className="underline hover:decoration-red-800"
         >
-          {selectedAd.linkText}
+          {" "}{selectedAd.linkText}
         </Link>
       </h1>
     </footer>
