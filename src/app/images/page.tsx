@@ -169,9 +169,7 @@ export default function Home() {
           Regenerate images
         </button>
         <AdComponent/>
-        
       </div>
-      
     </>
   );
 }

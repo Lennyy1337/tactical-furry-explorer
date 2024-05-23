@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Ad {
   message: string;
@@ -36,21 +36,33 @@ const ads: Ad[] = [
   {
     message: "Best furry serverside - ",
     link: "https://discord.gg/ceyzD5AN4Y",
-    linkText: "Monogon"
+    linkText: "Monogon",
   },
   {
     message: "Pyrite is selling his feet pics - ",
     link: "https://discord.com/users/1100894899743768577",
-    linkText: "Pyrite"
-  }
+    linkText: "Pyrite",
+  },
 ];
 
 export default function AdComponent() {
   const [selectedAd, setSelectedAd] = useState<Ad | null>(null);
+  const isMounted = useRef(true);
+  
 
   useEffect(() => {
-    const randomAd = ads[Math.floor(Math.random() * ads.length)];
-    setSelectedAd(randomAd);
+    const selectRandomAd = () => {
+      const randomAd = ads[Math.floor(Math.random() * ads.length)];
+      setSelectedAd(randomAd);
+    };
+
+    selectRandomAd(); 
+
+    const intervalId = setInterval(selectRandomAd, 10000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   if (!selectedAd) return null;
@@ -58,7 +70,7 @@ export default function AdComponent() {
   return (
     <footer className="w-full h-12 bg-gray-800 flex justify-center">
       <h1 className="text-white text-center font-bold md:text-3xl text-xl m-auto">
-        {selectedAd.message}{" "}
+        {selectedAd.message}{"  "}
         <Link
           href={selectedAd.link}
           className="underline hover:decoration-red-800"
