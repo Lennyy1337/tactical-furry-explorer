@@ -40,7 +40,7 @@ export default function Home() {
       }
 
       localStorage.setItem("savedsession", selectedCategory);
-      const url = `https://v2.yiff.rest/${selectedCategory}/?notes=disabled&amount=4`;
+      const url = `/api/${selectedCategory}/?notes=disabled&amount=4`;
 
       const response = await axios.get(url);
       const data = response.data;

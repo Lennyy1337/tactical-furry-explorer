@@ -18,11 +18,11 @@ export default function Fullscreencard(props: Props) {
   const navigation = useRouter();
 
   const imageUrl =
-    `https://v2.yiff.rest/images/${props.params.id}.json`;
+    `/api/images/${props.params.id}.json`;
 
   async function getImage() {
     try {
-      const url = `https://v2.yiff.rest/images/${props.params.id}.json`;
+      const url = `/api/images/${props.params.id}.json`;
 
       const responseData = (await axios.get(url)).data;
 
