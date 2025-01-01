@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Select, SelectItem } from "@nextui-org/select";
 import { categories } from "@/lib/categories";
 import AdComponent from "../components/ad";
+import Image from "next/image";
 
 export default function Home() {
   const [pics, setPics] = useState<string[]>([]);
@@ -14,7 +15,8 @@ export default function Home() {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const [clicked, setClicked] = useState<boolean>(false);
   const [attempts, setAttempts] = useState<number>(0);
-  const [selectedCategory, setSelectedCategory] = useState<string>("animals.birb");
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("animals.birb");
 
   const router = useRouter();
 
@@ -40,8 +42,8 @@ export default function Home() {
       }
 
       localStorage.setItem("savedsession", selectedCategory);
-      const url = `/api/${selectedCategory}/?notes=disabled&amount=4`;
-
+      const url = `https://v2.yiff.rest/${selectedCategory}/?notes=disabled&amount=4`;
+      console.log(url);
       const response = await axios.get(url);
       const data = response.data;
       const fetchedPics = data.images.map((image: any) => image.url);
@@ -68,31 +70,37 @@ export default function Home() {
       const regex = /\/([^/]+)$/;
       const match = imageUrl.match(regex);
       const filenameWithExtension = match ? match[1] : null;
-      const filename = filenameWithExtension ? filenameWithExtension.split(".")[0] : null;
+      const filename = filenameWithExtension
+        ? filenameWithExtension.split(".")[0]
+        : null;
 
       localStorage.setItem("savedsession", selectedCategory);
       window.open("/images/" + filename + `?url=${imageUrl}`, "_blank");
     }
 
     return (
-      <div
-        className="max-sm:w-80 max-sm:h-80 w-[23rem] h-96 bg-white rounded-xl m-5 transition-all ease-in-out hover:scale-105"
-        style={{
-          backgroundImage: `url(${url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          transition: "transform 0.3s ease-in-out",
-        }}
-        onLoad={() => setImageLoaded(true)}
-      >
+      <div className="max-sm:w-80 max-sm:h-80 w-[23rem] h-96 bg-white rounded-xl m-5 transition-transform ease-in-out hover:scale-105 overflow-hidden relative">
         <button
           onClick={getFullImage}
-          className="border-2 m-2 border-black rounded-xl p-2 text-black"
+          className="border-2 m-2 border-black rounded-xl p-2 text-black z-10 absolute top-2 left-2"
         >
           Full screen
         </button>
-        
-        {/* Content */}
+        <Image
+          src={url}
+          alt="Background Image"
+          objectFit="cover"
+          objectPosition="center"
+          layout="fill"
+          onLoad={(event) => {
+            event.currentTarget.setAttribute(
+              "data-loaded",
+              "true"
+            );
+          }}
+          data-loaded="false"
+          className="rounded-xl data-[loaded=false]:animate-pulse data-[loaded=false]:bg-gray-500"
+        />
       </div>
     );
   }
@@ -163,7 +171,7 @@ export default function Home() {
         >
           Regenerate images
         </button>
-        <AdComponent/>
+        <AdComponent />
       </div>
     </>
   );

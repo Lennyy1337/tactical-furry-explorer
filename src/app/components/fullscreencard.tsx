@@ -18,11 +18,11 @@ export default function Fullscreencard(props: Props) {
   const navigation = useRouter();
 
   const imageUrl =
-    `/api/images/${props.params.id}.json`;
+    `https://v2.yiff.rest/images/${props.params.id}.json`;
 
   async function getImage() {
     try {
-      const url = `/api/images/${props.params.id}.json`;
+      const url = `https://v2.yiff.rest/images/${props.params.id}.json`;
 
       const responseData = (await axios.get(url)).data;
 
@@ -57,10 +57,8 @@ export default function Fullscreencard(props: Props) {
               <Image
                 src={data.url}
                 alt="Image"
-                width={data.width}
-                height={data.height}
-                layout="responsive"
-                className={`rounded-lg md:h-screen md:w-screen bg-contain ${loaded ? "" : "bg-gray-500 animate-pulse"}`}
+                layout="fill"
+                className={`rounded-lg md:h-screen md:w-screen ${loaded ? "" : "bg-gray-500 animate-pulse"}`}
                 style={{ maxWidth: "130vh" }}
                 onLoadingComplete={function(){setLoaded(true)}}
               />
